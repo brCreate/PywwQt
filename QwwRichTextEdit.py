@@ -25,9 +25,37 @@ class QwwRichTextEdit(QTextEdit):
 
     
     def __init__(parent: QWidget = None):
+        self._actions: list = []
+        self._cB: QAction = None
+        self._tb: QToolBar = QToolBar(self)
+        self._tb.setIconSize(QSize(24, 24))
+        self._ac: QAction = None
+        self._ar: QAction = None
+        self._al: QAction = None
+        self._aj: QAction = None
+        self._li: QAction = None
+        
+        self._fcb: QFontComboBox = QFontComboBox(self)
+        self._actions[self.Action.FontFamilyAction] = self._tb.addWidget(self._fcb)
+        self._fcb.activated.connect(self.setFont_h)
+        self._fsp: QComboBox = QComboBox(self)
+        self._actions[self.Action.FontSizeAction] = tb.addWidget(self._fsp)
+        self._fsp.activated.connect(self.setFont_h)
+        for s: int in QFontDatabase.standardSizes():
+            self._fsp.addItem(str(s))
+        self._currentList: QTextList = None
+        
+        self._options: self.Options = (self.Options.Style | 
+                                       self.Options.Alignment | 
+                                       self.Options.FontFamily |
+                                       self.Options.FontSize |
+                                       self.Options.Color)
+        
+
+    def options() -> self.Option:
         pass
 
-    def options() -> Option:
+    def toolBarAction(a: self.Action) -> QAction:
         pass
 
     @pyqtSlot
@@ -42,4 +70,40 @@ class QwwRichTextEdit(QTextEdit):
     def setItalic(v: bool) -> None:
         pass
 
-# Under construction...
+    @pyqtSlot
+    def setUnderline(v: bool) -> None:
+        pass
+d
+    @pyqtSlot
+    def setFont_h() -> None:
+        pass
+
+    @pyqtSlot
+    def setFont(f: QFont) -> None:
+        pass
+
+    @pyqtSlot
+    def setList(v: bool) -> None:
+        pass
+
+    @pyqtSlot
+    def setColor(c: QColor) -> None:
+        pass
+
+    @pyqtSlot
+    def setOptions(opt: self.Options) -> None:
+        pass
+
+    @pyqtSlot
+    def updateCurrentCharFormat(fmt: QTextCharFormat) -> None:
+        pass
+
+    @pyqtSlot
+    def updateCurrentBlockFormat() -> None:
+        pass
+
+    def event(e: QEvent) -> bool:
+        pass
+
+    def contextMenuEvent(event: QContextMenuEvent) -> None:
+        pass
